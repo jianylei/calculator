@@ -18,7 +18,17 @@ deleteBtn.onclick = () => {
 
 numBtn.forEach(button => {
     button.onclick = () => {
-        if(currOperarion.innerText === "") console.log("fd");
-        currOperarion.innerText = button.innerText;
+        if(currOperarion.innerText === "") {
+            currOperarion.innerText = button.innerText;
+        }
+        else {
+            append(button.innerText)
+        }
     }
 });
+
+function append(num){
+    let tmp = currOperarion.innerText + num;
+    currOperarion.innerText = tmp
+
+}
