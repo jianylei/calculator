@@ -1,5 +1,5 @@
-let rhs, lhs, operator = "";
-let flag= false;
+let rhs = "", lhs = "", operator = "";
+let calcflag = false, errflag = false;
 
 const clearBtn = document.querySelector(".btn-clear");
 const deleteBtn = document.querySelector(".btn-delete");
@@ -9,16 +9,10 @@ const equalBtn = document.querySelector(".btn-equal");
 const prevOperation = document.querySelector(".previous-operation");
 const currOperation = document.querySelector(".current-operation");
 
-clearBtn.onclick = () => {
-    prevOperation.innerText = "";
-    currOperation.innerText = "";
-    lsh = "";
-    rhs = "";
-    operator = "";
-}
+clearBtn.onclick = clearScreen;
 
 deleteBtn.onclick = () => {
-    if(currOperation.innerText !== "") {
+    if(currOperation.innerText) {
         let tmp = currOperation.innerText;
         currOperation.innerText = tmp.substring(0, tmp.length - 1);
     }
@@ -26,48 +20,64 @@ deleteBtn.onclick = () => {
 }
 
 equalBtn.onclick = () => {
-    if(prevOperation.innerText !== "" && operator !== "" && lhs && rhs) {
+    if(prevOperation.innerText && operator && lhs && rhs) {
         let tmp = operate();
-        prevOperation.innerText = prevOperation.innerText + " " + currOperation.innerText + " =";
-        currOperation.innerText = tmp;
+        if(tmp) {
+            prevOperation.innerText = prevOperation.innerText + " " + currOperation.innerText + " =";
+            currOperation.innerText = tmp;
+        }
     }
     
 }
 
 operatorBtn.forEach(button => {
     button.onclick = () => {
+        if(!errflag) {
         
-        if(operator !== "" && lhs && rhs){
+
+        if(operator && lhs && rhs ){
             let tmp = operate();
             prevOperation.innerText = prevOperation.innerText + " " + currOperation.innerText + " =";
             currOperation.innerText = tmp;
         }
-        lhs = currOperation.innerText;
-        operator = button.innerText;
-        flag = true;
-        console.log("lhs :"+lhs+", op: " +operator+", rhs: "+rhs);
 
-        if(currOperation.innerText === "") {
+        if(!currOperation.innerText) {
             prevOperation.innerText = "0 " + button.innerText;
         }
         else {
             prevOperation.innerText = currOperation.innerText + " " + button.innerText;
         }
-    }
+
+        lhs = currOperation.innerText;
+        operator = button.innerText;
+        calcflag = true;
+    }}
 })
 
 numBtn.forEach(button => {
     button.onclick = () => {
-        if(currOperation.innerText === ""  || flag) {
+        if(errflag) {
+            clearScreen();
+            errflag = false;
+        }
+        if(!currOperation.innerText  || calcflag) {
             currOperation.innerText = button.innerText;
-            flag = false;
+            calcflag = false;
         }
         else {
             append(button.innerText)
         }
-        rhs = currOperation.innerText; console.log("lhs :"+lhs+", op: " +operator+", rhs: "+rhs);
+        rhs = currOperation.innerText;
     }
 })
+
+function clearScreen() {
+    prevOperation.innerText = "";
+    currOperation.innerText = "";
+    lsh = "";
+    rhs = "";
+    operator = "";
+}
 
 function append(num){
     let tmp = currOperation.innerText
@@ -77,16 +87,29 @@ function append(num){
 }
 
 function operate(){
-    if(lhs, rhs, operator) {
+        if(rhs == "0") {
+            prevOperation.innerText = "error occured";
+            currOperation.innerText = "unable to divide by 0"
+            errflag = true;
+            return "";
+        }
         let tmp;
         switch (operator) {
             case "x":
                 tmp = parseFloat(lhs) * parseFloat(rhs);
                 break;
-        }console.log("lhs :"+lhs+", op: " +operator+", rhs: "+rhs);
+            case "÷":
+                tmp = parseFloat(lhs) / parseFloat(rhs);
+                break;
+            case "+":
+                tmp = parseFloat(lhs) + parseFloat(rhs);
+                break;
+            case "-":
+                tmp = parseFloat(lhs) - parseFloat(rhs);
+                break;
+        }
         lhs = tmp;
         rhs = "";
         operator = "";
         return tmp;
-    }
 }
