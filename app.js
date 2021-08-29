@@ -28,7 +28,8 @@ numBtn.forEach(button => {
 });
 
 function append(num){
-    let tmp = currOperarion.innerText + num;
-    currOperarion.innerText = tmp
-
+    let tmp = currOperarion.innerText
+    if(num !== "." || !tmp.includes(".")) {
+        currOperarion.innerText = tmp + num;
+    }
 }
