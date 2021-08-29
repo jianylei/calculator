@@ -2,7 +2,7 @@ body{
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
-    background-color: #00AAFF;
+    background-color: #028090;
 }
 
 /* MAIN */
@@ -12,7 +12,7 @@ body{
     align-content: center;
     min-height: 100vh;
     grid-template-columns: repeat(4,110px);
-    grid-template-rows: minmax(120px, auto) repeat(5,110px);
+    grid-template-rows: minmax(120px, auto) repeat(5,110px); gap: 0;
 }
 /* display */
 .display{
@@ -36,7 +36,8 @@ body{
 }
 /* buttons */
 .main-container > button{
-    cursor: pointer;
+    cursor: pointer; 
+    margin: 0;
     outline: none;
     font-size: 1.5rem;
     border: 1px solid white;
