@@ -1,8 +1,6 @@
 body{
     font-family: 'Roboto', sans-serif;
-    padding: 0;
-    margin: 0;
-    background-color: #028090;
+    background-color: #4c728398;
 }
 
 /* MAIN */
@@ -11,8 +9,8 @@ body{
     justify-content: center;
     align-content: center;
     min-height: 100vh;
-    grid-template-columns: repeat(4,110px);
-    grid-template-rows: minmax(120px, auto) repeat(5,110px); gap: 0;
+    grid-template-columns: repeat(4,100px);
+    grid-template-rows: minmax(120px, auto) repeat(5,100px);
 }
 /* display */
 .display{
@@ -25,6 +23,7 @@ body{
     background-color: rgba(0, 0, 0, .70);
     word-wrap: break-word;
     word-break: break-all;
+    border: 1px solid white;
 }
 .previous-operation{
     color: rgba(255, 255, 255, .70);
@@ -35,17 +34,44 @@ body{
     font-size: 2.5rem;
 }
 /* buttons */
-.main-container > button{
+ button{
     cursor: pointer; 
     margin: 0;
     outline: none;
     font-size: 1.5rem;
+    color: white;
     border: 1px solid white;
+    
+}
+
+.btn-number{
     background-color: rgba(255, 255, 255, .70);
 }
-.main-container > button:hover{
+.btn-number:hover{
     background-color: rgba(255, 255, 255, .90);
 }
-.btn-clear, .btn-delete{
+.btn-clear{
     grid-column: span 2;
+    background-color: rgba(244, 91, 105, .90);
+}
+.btn-delete{
+    background-color: rgba(244, 91, 105, .90);
+}
+.btn-clear:hover, .btn-delete:hover{
+    background-color: rgba(244, 91, 105, .70);
+}
+.btn-operator, .btn-equal{
+    background-color: rgba(29, 45, 68, 0.90);
+}
+.btn-operator:hover, .btn-equal:hover{
+    background-color: rgba(29, 45, 68, 0.70);
+}
+.btn-equal{
+    grid-column: span 2;
+}
+.btn-number{
+    background-color: rgba(2, 128, 144, 0.90);
+}
+.btn-number:hover{
+    background-color: rgba(2, 128, 144, 0.70);
 }
